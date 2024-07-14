@@ -1,6 +1,7 @@
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from sqlalchemy.orm import Mapped, declarative_base, mapped_column
-from src.backend.config import settings
+
+from core.config import settings
 
 
 class PreBase:
@@ -14,6 +15,7 @@ engine = create_async_engine(
     settings.asyncpg_url.unicode_string(),
     echo=True,
 )
+
 
 AsyncSessionLocal = async_sessionmaker(engine)
 

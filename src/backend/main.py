@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from src.backend.routers import discord_users
+
+from backend.routers import movies
 
 app = FastAPI()
-app.include_router(discord_users.router)
+app.include_router(movies.router)

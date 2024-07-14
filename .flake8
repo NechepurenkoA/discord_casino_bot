@@ -1,3 +1,4 @@
 [flake8]
+exclude = */migrations/*
 extend-ignore = E203, W503, E704
 max-line-length = 88

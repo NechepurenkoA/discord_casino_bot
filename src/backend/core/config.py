@@ -1,12 +1,9 @@
-from dotenv import load_dotenv
-from pydantic_core import MultiHostUrl
+from pydantic import PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
-load_dotenv()
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env")
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     DB_HOST: str
     DB_PORT: int
@@ -16,7 +13,7 @@ class Settings(BaseSettings):
 
     @property
     def asyncpg_url(self):
-        return MultiHostUrl.build(
+        return PostgresDsn.build(
             scheme="postgresql+asyncpg",
             username=self.DB_USER,
             password=self.DB_PASSWORD,
