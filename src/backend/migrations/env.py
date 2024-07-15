@@ -9,7 +9,8 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
 
-from src.backend.core import Base, settings
+from src.backend.core.config import settings
+from src.backend.core.database import Base
 
 
 config = context.config
