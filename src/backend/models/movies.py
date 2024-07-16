@@ -2,9 +2,10 @@ from enum import Enum
 
 from sqlalchemy import Column, Date
 from sqlalchemy.dialects import postgresql
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.backend.core.database import Base
+from src.backend.models.movies_actors import MovieActor
 
 
 class Genre(Enum):
@@ -26,3 +27,6 @@ class Movie(Base):
         postgresql.ARRAY(postgresql.ENUM(Genre, name="genres", create_type=False))
     )
     date_published = Column(Date, nullable=False)
+    actors: Mapped[list["MovieActor"]] = relationship(
+        "MovieActor", back_populates="movie"
+    )

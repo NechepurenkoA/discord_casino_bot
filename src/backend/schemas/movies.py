@@ -5,6 +5,12 @@ from pydantic import BaseModel
 from src.backend.models.movies import Genre
 
 
+class MovieOutForActor(BaseModel):
+    id: int
+    title: str
+    genre: list[str]
+
+
 class MovieBase(BaseModel):
     title: str
     genre: list[Genre]
@@ -17,6 +23,3 @@ class MovieIn(MovieBase):
 
 class MovieOut(MovieIn):
     id: int
-
-    class Config:
-        from_attributes = True

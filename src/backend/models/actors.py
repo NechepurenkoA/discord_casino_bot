@@ -2,7 +2,7 @@ from enum import Enum
 
 from sqlalchemy import Column, Date
 from sqlalchemy.dialects import postgresql
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.backend.core.database import Base
 
@@ -21,4 +21,7 @@ class Actor(Base):
     birth_date = Column(Date, nullable=False)
     gender: Mapped[Gender] = mapped_column(
         postgresql.ENUM(Gender, name="genders", create_type=False)
+    )
+    movies: Mapped[list["MovieActor"]] = relationship(  # noqa
+        "MovieActor", back_populates="actor"
     )
